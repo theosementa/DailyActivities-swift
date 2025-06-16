@@ -29,6 +29,11 @@ struct AddCategoryScreen: View {
                                 self.viewModel.fieldHeight = fieldHeight.height
                             }
                     }
+                    
+                    ColorPickerView(
+                        selectedColor: $viewModel.color,
+                        colorWidth: self.viewModel.fieldHeight
+                    )
                 }
                 .padding(TKDesignSystem.Padding.large)
             }

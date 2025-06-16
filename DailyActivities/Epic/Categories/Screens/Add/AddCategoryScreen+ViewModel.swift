@@ -14,7 +14,7 @@ extension AddCategoryScreen {
     final class ViewModel {
         var emoji: String = "🎮"
         var name : String = ""
-        var color: Color = .red
+        var color: Color? = nil
         
         var fieldHeight: CGFloat = 0
     }

@@ -7,12 +7,30 @@
 
 import SwiftUI
 
-struct IconSVGView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+enum IconSVGValue: CGFloat {
+    /// Value `10`
+    case extraSmall = 10
+    /// Value `14`
+    case small = 14
+    /// Value `16`
+    case standard = 16
+    /// Value `20`
+    case medium = 20
+    /// Value `24`
+    case large = 24
 }
 
-#Preview {
-    IconSVGView()
+struct IconSVGView: View {
+    
+    // MARK: Dependencies
+    var icon: ImageResource
+    var value: IconSVGValue
+    
+    // MARK: - View
+    var body: some View {
+        Image(icon)
+            .resizable()
+            .renderingMode(.template)
+            .frame(width: value.rawValue, height: value.rawValue)
+    }
 }

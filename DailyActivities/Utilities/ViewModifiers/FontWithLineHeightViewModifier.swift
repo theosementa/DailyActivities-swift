@@ -1,3 +1,10 @@
+//
+//  FontWithLineHeightViewModifier.swift
+//  DailyActivities
+//
+//  Created by Theo Sementa on 16/06/2025.
+//
+
 import SwiftUI
 
 struct FontWithLineHeightViewModifier: ViewModifier {

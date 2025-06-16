@@ -6,3 +6,26 @@
 //
 
 import Foundation
+import TheoKit
+import SwiftUICore
+
+extension TKDesignSystem {
+    
+    static func setupFonts() {
+        TKDesignSystem.fontBold = "Satoshi-Bold"
+        TKDesignSystem.fontMedium = "Satoshi-Medium"
+        TKDesignSystem.fontRegular = "Satoshi-Regular"
+    }
+    
+}
+
+extension View {
+    
+    func applyDesignSystem() -> some View {
+        self
+            .onAppear {
+                TKDesignSystem.setupFonts()
+            }
+    }
+    
+}

@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
+
+extension AddCategoryScreen {
+    
+    @Observable
+    final class ViewModel {
+        var emoji: String = "🎮"
+        var name : String = ""
+        var color: Color = .red
+    }
+    
+}

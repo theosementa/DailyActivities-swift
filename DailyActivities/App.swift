@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheoKit
 
 @main
 struct DailyActivitiesApp: App {
@@ -14,6 +15,7 @@ struct DailyActivitiesApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .applyDesignSystem()
         }
     }
 }

@@ -12,38 +12,47 @@ import NavigationKit
 struct NavigationBarView: View {
     
     // MARK: Dependencies
+    var title: String? = nil
     var withDismissButton: Bool = true
     
     // MARK: - View
     var body: some View {
-        VStack {
-            if withDismissButton {
-                NavigationDismissButton {
-                    HStack(spacing: TKDesignSystem.Spacing.extraSmall) {
-                        IconSVGView(icon: .iconArrowLeft, value: .medium)
-                        
-                        Text("word_back".localized)
-                            .font(TKDesignSystem.Fonts.Body.medium)
+        VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.small) {
+            HStack(spacing: TKDesignSystem.Spacing.small) {
+                if withDismissButton {
+                    NavigationDismissButton {
+                        HStack(spacing: TKDesignSystem.Spacing.extraSmall) {
+                            IconSVGView(icon: .iconArrowLeft, value: .medium)
+                            
+                            Text("word_back".localized)
+                                .fontWithLineHeight(Fonts.Body.medium)
+                        }
+                        .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
                     }
-                    .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
+                    .fullWidth(.leading)
                 }
-                .fullWidth(.leading)
+                
+                Button {
+                    
+                } label: {
+                    Text("word_create".localized)
+                        .fontWithLineHeight(Fonts.Body.large)
+                        .foregroundStyle(TKDesignSystem.Colors.Info.c500)
+                }
+                .fullWidth(.trailing)
             }
             
-            Button {
-                
-            } label: {
-                Text("word_create".localized)
-                    .font(TKDesignSystem.Fonts.Body.large)
-                    .foregroundStyle(TKDesignSystem.Colors.Info.c500)
+            if let title {
+                Text(title)
+                    .fontWithLineHeight(Fonts.Title.large)
             }
-            .fullWidth(.trailing)
         }
+        .padding(.horizontal, TKDesignSystem.Padding.large)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    NavigationBarView()
+    NavigationBarView(title: "Preview")
         .applyDesignSystem()
 }

@@ -15,6 +15,8 @@ extension AddCategoryScreen {
         var emoji: String = "🎮"
         var name : String = ""
         var color: Color = .red
+        
+        var fieldHeight: CGFloat = 0
     }
     
 }

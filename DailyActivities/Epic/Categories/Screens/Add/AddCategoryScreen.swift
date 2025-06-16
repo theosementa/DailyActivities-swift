@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheoKit
 
 struct AddCategoryScreen: View {
     
@@ -14,11 +15,29 @@ struct AddCategoryScreen: View {
     
     // MARK: - View
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 0) {
+            NavigationBarView(title: "word_add_category".localized)
+            
+            ScrollView {
+                VStack(spacing: TKDesignSystem.Spacing.large) {
+                    HStack(spacing: TKDesignSystem.Spacing.medium) {
+                        EmojiPickerView(emoji: $viewModel.emoji, width: viewModel.fieldHeight)
+                        
+                        TextFieldView("word_name".localized, text: $viewModel.name)
+                            .fontWithLineHeight(Fonts.Body.large)
+                            .getSize { fieldHeight in
+                                self.viewModel.fieldHeight = fieldHeight.height
+                            }
+                    }
+                }
+                .padding(TKDesignSystem.Padding.large)
+            }
+        }
     }
 }
 
 // MARK: - Preview
 #Preview {
     AddCategoryScreen()
+        .preferredColorScheme(.dark)
 }

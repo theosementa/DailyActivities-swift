@@ -11,11 +11,13 @@ import TheoKit
 @main
 struct DailyActivitiesApp: App {
     
+    @State private var categoriesStore: CategoriesStore = .init()
+    
     // MARK: - View
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .applyDesignSystem()
+            HomeScreen()
+                .environment(categoriesStore)
         }
     }
 }

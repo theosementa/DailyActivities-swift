@@ -1,5 +1,5 @@
 {
-  "originHash" : "eb1a33920b323da65b68809bc9a552a4b8e0af55b321603058bd7568ede24353",
+  "originHash" : "92f9a7218e8092ee915d977e5d3219df9e41e6dcbc0bbeb8ae6b4f4313eab0b9",
   "pins" : [
     {
       "identity" : "mcemojipicker",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/theosementa/TheoKit",
       "state" : {
-        "revision" : "4192c0c2e8ddb54f4e788292216134777debbfd3",
-        "version" : "1.0.9"
+        "revision" : "300370cafd51433bf9d935619ec8f77c39ce75d4",
+        "version" : "1.1.0"
       }
     }
   ],

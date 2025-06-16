@@ -20,14 +20,18 @@ final class ActivityEntity: Identifiable {
     
     var notes: String = ""
     
+    var category: CategoryEntity
+    
     init(
         startDate: Date = .now,
         endDate: Date? = nil,
-        notes: String = ""
+        notes: String = "",
+        category: CategoryEntity
     ) {
         self.startDate = startDate
         self.endDate = endDate
         self.notes = notes
+        self.category = category
     }
     
 }
@@ -38,5 +42,6 @@ extension ActivityEntity {
         let endDate = self.endDate ?? Date()
         return endDate.timeIntervalSince(self.startDate)
     }
+    
 }
     

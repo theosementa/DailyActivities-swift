@@ -54,5 +54,4 @@ struct NavigationBarView: View {
 // MARK: - Preview
 #Preview {
     NavigationBarView(title: "Preview")
-        .applyDesignSystem()
 }

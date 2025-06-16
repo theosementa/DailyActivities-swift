@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUICore
 
 @Model
 final class CategoryEntity: Identifiable {
@@ -20,6 +21,9 @@ final class CategoryEntity: Identifiable {
     
     var colorHex: String
     
+    @Relationship(deleteRule: .cascade, inverse: \ActivityEntity.category)
+    var activities: [ActivityEntity] = []
+    
     init(name: String, emoji: String, colorHex: String) {
         self.name = name
         self.emoji = emoji
@@ -27,4 +31,37 @@ final class CategoryEntity: Identifiable {
     }
     
 }
+
+extension CategoryEntity {
     
+    var color: Color {
+        return Color(hex: self.colorHex)
+    }
+    
+    var elapsedThisWeek: TimeInterval {
+        let startOfWeek = Calendar.current.date(
+            from: Calendar.current.dateComponents(
+                [.yearForWeekOfYear, .weekOfYear],
+                from: Date()
+            )
+        )!
+        return activities.reduce(0) { total, activity in
+            if activity.startDate >= startOfWeek {
+                return total + activity.duration
+            }
+            return total
+        }
+    }
+    
+}
+
+// MARK: - Mocks
+extension CategoryEntity {
+    
+    static let preview = CategoryEntity(
+        name: "Gaming",
+        emoji: "🎮",
+        colorHex: "#FF5733"
+    )
+    
+}

@@ -30,12 +30,12 @@ struct CategoryRowView: View {
                 Text(category.name)
                     .fontWithLineHeight(Fonts.Body.medium)
                 
-                Text(category.elapsedThisWeek == .zero ? elapsedThisWeek.asHoursMinutes : category.elapsedThisWeek.asHoursMinutes)
+                Text(elapsedThisWeek.asHoursMinutes)
                     .fontWithLineHeight(Fonts.Body.small)
                     .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
             }
             .fullWidth(.leading)
-            
+                        
             IconSVGView(icon: .iconChevronRight, value: .large)
         }
         .padding(TKDesignSystem.Padding.extraSmall)

@@ -20,23 +20,28 @@ final class ActivityEntity: Identifiable {
     
     var notes: String = ""
     
-    var category: CategoryEntity
+    var categoryId: UUID
     
     init(
         startDate: Date = .now,
         endDate: Date? = nil,
         notes: String = "",
-        category: CategoryEntity
+        categoryId: UUID
     ) {
         self.startDate = startDate
         self.endDate = endDate
         self.notes = notes
-        self.category = category
+        self.categoryId = categoryId
     }
     
 }
 
+@MainActor
 extension ActivityEntity {
+    
+    var category: CategoryEntity? {
+        return CategoryStore.shared.findOneById(self.categoryId)
+    }
     
     var duration: TimeInterval {
         let endDate = self.endDate ?? Date()
@@ -45,3 +50,14 @@ extension ActivityEntity {
     
 }
     
+// MARK: - Mocks
+extension ActivityEntity {
+    
+    static let preview: ActivityEntity = .init(
+        startDate: Date(timeIntervalSinceNow: -3600),
+        endDate: Date(),
+        notes: "Test activity",
+        categoryId: CategoryEntity.preview.id
+    )
+    
+}

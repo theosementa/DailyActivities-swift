@@ -24,49 +24,58 @@ struct CategoryDetailsScreen: View {
     // MARK: - View
     var body: some View {
         if let category {
-            VStack {
+            ScrollView {
                 VStack {
-                    ForEach(activityStore.activities) { activity in
-                        if activity.endDate == nil {
-                            Text(activity.startDate, style: .timer)
+                    HStack {
+                        Button {
+                            Task {
+                                let newActivity: ActivityEntity = .init(categoryId: category.id)
+                                await activityStore.create(newActivity)
+                                sessionManager.startLiveActivity(
+                                    sessionName: category.name,
+                                    sessionEmoji: category.emoji,
+                                    sessionColorHex: category.colorHex
+                                )
+                            }
+                        } label: {
+                            Text("Start a session")
+                                .foregroundStyle(Color.white)
+                                .padding()
+                                .fullWidth()
+                                .background(Color.blue, in: .rect(cornerRadius: 12))
+                        }
+                        
+                        Button {
+                            if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
+                                currentSession.endDate = Date()
+                                sessionManager.endLiveActivity()
+                                do {
+                                    try activityStore.repository.context.save()
+                                } catch {
+                                    print("⚠️ \(error.localizedDescription)")
+                                }
+                            }
+                        } label: {
+                            Text("End session")
+                                .foregroundStyle(Color.white)
+                                .padding()
+                                .fullWidth()
+                                .background(Color.red, in: .rect(cornerRadius: 12))
                         }
                     }
-                }
-                
-                Button {
-                    Task {
-                        let newActivity: ActivityEntity = .init(category: category)
-                        await activityStore.create(newActivity)
-                        sessionManager.startLiveActivity(
-                            sessionName: category.name,
-                            sessionEmoji: category.emoji,
-                            sessionColorHex: category.colorHex
-                        )
+                    
+                    if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
+                        ActivityRowView(activity: currentSession)
+                            .padding(.bottom, 32)
+                    } else {
+                        Text("No active session")
                     }
-                } label: {
-                    Text("Start a session")
-                        .foregroundStyle(Color.white)
-                        .padding()
-                        .background(Color.blue, in: .rect(cornerRadius: 12))
-                }
-                
-                Button {
-                    let notEndedActivities = activityStore.activities.filter { $0.endDate == nil }
-                    if let first = notEndedActivities.first {
-                        first.endDate = Date()
-                        sessionManager.endLiveActivity()
-                        do {
-                            try activityStore.repository.context.save()
-                        } catch {
-                            print("⚠️ \(error.localizedDescription)")
-                        }
+                    
+                    ForEach(activityStore.activities.filter { $0.endDate != nil }) { activity in
+                        ActivityRowView(activity: activity)
                     }
-                } label: {
-                    Text("End session")
-                        .foregroundStyle(Color.white)
-                        .padding()
-                        .background(Color.red, in: .rect(cornerRadius: 12))
                 }
+                .padding(24)
             }
             .onViewDidLoad {
                 await activityStore.fetchAll(for: categoryId)

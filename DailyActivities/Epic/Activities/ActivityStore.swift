@@ -15,6 +15,7 @@ final class ActivityStore {
     private init() { }
     
     private(set) var activities: [ActivityEntity] = []
+    var currentSession: ActivityEntity? = nil
 }
 
 extension ActivityStore {
@@ -31,6 +32,7 @@ extension ActivityStore {
         do {
             try repository.insert(activity)
             self.activities.append(activity)
+            self.currentSession = activity
         } catch {
             print("⚠️ \(error.localizedDescription)")
         }

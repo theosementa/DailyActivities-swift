@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheoKit
 
 struct CategoryDetailsScreen: View {
     
@@ -48,6 +49,7 @@ struct CategoryDetailsScreen: View {
                         Button {
                             if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
                                 currentSession.endDate = Date()
+                                activityStore.currentSession = nil
                                 sessionManager.endLiveActivity()
                                 do {
                                     try activityStore.repository.context.save()
@@ -64,7 +66,7 @@ struct CategoryDetailsScreen: View {
                         }
                     }
                     
-                    if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
+                    if let currentSession = activityStore.currentSession {
                         ActivityRowView(activity: currentSession)
                             .padding(.bottom, 32)
                     } else {
@@ -77,6 +79,7 @@ struct CategoryDetailsScreen: View {
                 }
                 .padding(24)
             }
+            .background(TKDesignSystem.Colors.Background.Theme.bg50)
             .onViewDidLoad {
                 await activityStore.fetchAll(for: categoryId)
             }

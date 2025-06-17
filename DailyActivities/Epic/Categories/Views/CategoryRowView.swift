@@ -12,9 +12,7 @@ struct CategoryRowView: View {
     
     // MARK: Dependencies
     var category: CategoryEntity
-    
-    @State private var elapsedThisWeek: TimeInterval = .zero
-    
+        
     // MARK: - View
     var body: some View {
         HStack(spacing: TKDesignSystem.Spacing.medium) {
@@ -29,14 +27,17 @@ struct CategoryRowView: View {
             VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.extraSmall) {
                 Text(category.name)
                     .fontWithLineHeight(Fonts.Body.medium)
+                    .foregroundStyle(Color.label)
                 
-                Text(elapsedThisWeek.asHoursMinutes)
+                Text(self.category.elapsedTimeThisWeek.asHoursMinutes)
                     .fontWithLineHeight(Fonts.Body.small)
                     .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
             }
             .fullWidth(.leading)
                         
             IconSVGView(icon: .iconChevronRight, value: .large)
+                .foregroundStyle(Color.label)
+                .padding(.trailing, 16)
         }
         .padding(TKDesignSystem.Padding.extraSmall)
         .roundedRectangleBorder(
@@ -44,16 +45,15 @@ struct CategoryRowView: View {
             radius: TKDesignSystem.Radius.medium
         )
         .task {
-            elapsedThisWeek = await elapsedThisWeek()
+            await elapsedThisWeek()
         }
     }
     
-    func elapsedThisWeek() async -> TimeInterval {
+    func elapsedThisWeek() async {
         do {
-            return try await ActivityRepository.fetchTimeThisWeek(for: category.id)
+            self.category.elapsedTimeThisWeek = try await ActivityRepository.fetchTimeThisWeek(for: category.id)
         } catch {
             print("⚠️ \(error.localizedDescription)")
-            return .zero
         }
     }
 }

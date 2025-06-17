@@ -20,6 +20,9 @@ final class CategoryEntity: Identifiable {
     var emoji: String
     
     var colorHex: String
+    
+    @Attribute(.ephemeral)
+    var elapsedTimeThisWeek: TimeInterval = 0
         
     init(name: String, emoji: String, colorHex: String) {
         self.name = name
@@ -34,7 +37,7 @@ extension CategoryEntity {
     var color: Color {
         return Color(hex: self.colorHex)
     }
-    
+        
 }
 
 // MARK: - Mocks

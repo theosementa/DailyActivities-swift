@@ -4,12 +4,10 @@
 <dict>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Satoshi-Regular.otf</string>
-		<string>Satoshi-Medium.otf</string>
-		<string>Satoshi-Bold.otf</string>
-		<string>Satoshi-Black.otf</string>
-	</array>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
+	</dict>
 </dict>
 </plist>

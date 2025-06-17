@@ -7,27 +7,39 @@
 
 import SwiftUI
 import TheoKit
+import NavigationKit
 
 struct HomeScreen: View {
     
     // MARK: Environments
-    @Environment(CategoriesStore.self) private var categoriesStore
+    @Environment(CategoryStore.self) private var categoryStore
+    @EnvironmentObject private var router: Router<AppDestination>
 
     // MARK: - View
     var body: some View {
         ScrollView {
-            ForEach(categoriesStore.categories) { category in
-                CategoryRowView(category: category)
+            VStack(spacing: TKDesignSystem.Spacing.medium) {
+                ForEach(categoryStore.categories) { category in
+                    NavigationButton(
+                        route: .push,
+                        destination: AppDestination.category(.details(categoryId: category.id))
+                    ) {
+                        CategoryRowView(category: category)
+                    }
+                }
             }
+            .padding(TKDesignSystem.Padding.large)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(TKDesignSystem.Colors.Background.Theme.bg50)
         .overlay(alignment: .bottomTrailing) {
             AddButtonView {
-                
+                router.push(.category(.add))
             }
+            .padding(TKDesignSystem.Padding.large)
         }
         .onViewDidLoad {
-            await categoriesStore.fetchAll()
+            await categoryStore.fetchAll()
         }
     }
 }

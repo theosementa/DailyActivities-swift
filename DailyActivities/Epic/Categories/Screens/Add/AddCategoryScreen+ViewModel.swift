@@ -20,3 +20,15 @@ extension AddCategoryScreen {
     }
     
 }
+
+extension AddCategoryScreen.ViewModel {
+    
+    var categoryEntity: CategoryEntity {
+        CategoryEntity(
+            name: name,
+            emoji: emoji,
+            colorHex: color?.toHex() ?? "#FFFFFF"
+        )
+    }
+    
+}

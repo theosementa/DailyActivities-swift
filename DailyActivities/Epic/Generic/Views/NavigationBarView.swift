@@ -14,6 +14,7 @@ struct NavigationBarView: View {
     // MARK: Dependencies
     var title: String? = nil
     var withDismissButton: Bool = true
+    var action: (() async -> Void)? = nil
     
     // MARK: - View
     var body: some View {
@@ -33,7 +34,9 @@ struct NavigationBarView: View {
                 }
                 
                 Button {
-                    
+                    if let action {
+                        Task { await action() }
+                    }
                 } label: {
                     Text("word_create".localized)
                         .fontWithLineHeight(Fonts.Body.large)

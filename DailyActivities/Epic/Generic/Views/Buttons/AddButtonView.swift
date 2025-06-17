@@ -11,16 +11,16 @@ import TheoKit
 struct AddButtonView: View {
     
     // MARK: Dependencies
-    var action: () -> Void
+    var action: (() -> Void)?
     
-    init(action: @escaping () -> Void) {
+    init(action: (() -> Void)? = nil) {
         self.action = action
     }
     
     // MARK: - View
     var body: some View {
         Button {
-            
+            if let action { action() }
         } label: {
             IconSVGView(icon: .iconDiamondPlus, value: .large)
                 .foregroundStyle(Color.white)

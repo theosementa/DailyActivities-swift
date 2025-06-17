@@ -10,6 +10,9 @@
 		D9926C112E0009AA00BD0F54 /* TheoKit in Frameworks */ = {isa = PBXBuildFile; productRef = D9926C102E0009AA00BD0F54 /* TheoKit */; };
 		D9926C142E0009B500BD0F54 /* NavigationKit in Frameworks */ = {isa = PBXBuildFile; productRef = D9926C132E0009B500BD0F54 /* NavigationKit */; };
 		D99270762E0012A000BD0F54 /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = D99270752E0012A000BD0F54 /* MCEmojiPicker */; };
+		D99273C62E0051B700BD0F54 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99273C52E0051B700BD0F54 /* WidgetKit.framework */; };
+		D99273C82E0051B700BD0F54 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99273C72E0051B700BD0F54 /* SwiftUI.framework */; };
+		D99273D32E0051B800BD0F54 /* DailyActivities-LiveActivitiesExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,12 +30,36 @@
 			remoteGlobalIDString = D90DE9D12DFF4C92009D3647;
 			remoteInfo = DailyActivities;
 		};
+		D99273D12E0051B800BD0F54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D90DE9CA2DFF4C92009D3647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D99273C22E0051B700BD0F54;
+			remoteInfo = "DailyActivities-LiveActivitiesExtension";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D99273D82E0051B800BD0F54 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D99273D32E0051B800BD0F54 /* DailyActivities-LiveActivitiesExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D90DE9D22DFF4C93009D3647 /* DailyActivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyActivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D90DE9E12DFF4C94009D3647 /* DailyActivitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyActivitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D90DE9EB2DFF4C94009D3647 /* DailyActivitiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyActivitiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DailyActivities-LiveActivitiesExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D99273C52E0051B700BD0F54 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		D99273C72E0051B700BD0F54 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -43,6 +70,27 @@
 			);
 			target = D90DE9D12DFF4C92009D3647 /* DailyActivities */;
 		};
+		D99273D72E0051B800BD0F54 /* Exceptions for "DailyActivities-LiveActivities" folder in "DailyActivities-LiveActivitiesExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */;
+		};
+		D99273DC2E0052AF00BD0F54 /* Exceptions for "DailyActivities" folder in "DailyActivities-LiveActivitiesExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Core/SessionActivityViewModel.swift,
+			);
+			target = D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */;
+		};
+		D99273E62E00566A00BD0F54 /* Exceptions for "Shared" folder in "DailyActivities-LiveActivitiesExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SessionAttributes.swift,
+			);
+			target = D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -50,6 +98,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				D9926F9E2E000D1300BD0F54 /* Exceptions for "DailyActivities" folder in "DailyActivities" target */,
+				D99273DC2E0052AF00BD0F54 /* Exceptions for "DailyActivities" folder in "DailyActivities-LiveActivitiesExtension" target */,
 			);
 			path = DailyActivities;
 			sourceTree = "<group>";
@@ -62,6 +111,22 @@
 		D90DE9EE2DFF4C94009D3647 /* DailyActivitiesUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DailyActivitiesUITests;
+			sourceTree = "<group>";
+		};
+		D99273C92E0051B700BD0F54 /* DailyActivities-LiveActivities */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D99273D72E0051B800BD0F54 /* Exceptions for "DailyActivities-LiveActivities" folder in "DailyActivities-LiveActivitiesExtension" target */,
+			);
+			path = "DailyActivities-LiveActivities";
+			sourceTree = "<group>";
+		};
+		D99273E52E00566400BD0F54 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D99273E62E00566A00BD0F54 /* Exceptions for "Shared" folder in "DailyActivities-LiveActivitiesExtension" target */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -91,15 +156,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D99273C02E0051B700BD0F54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D99273C82E0051B700BD0F54 /* SwiftUI.framework in Frameworks */,
+				D99273C62E0051B700BD0F54 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		D90DE9C92DFF4C92009D3647 = {
 			isa = PBXGroup;
 			children = (
+				D99273E52E00566400BD0F54 /* Shared */,
 				D90DE9D42DFF4C93009D3647 /* DailyActivities */,
 				D90DE9E42DFF4C94009D3647 /* DailyActivitiesTests */,
 				D90DE9EE2DFF4C94009D3647 /* DailyActivitiesUITests */,
+				D99273C92E0051B700BD0F54 /* DailyActivities-LiveActivities */,
+				D99273C42E0051B700BD0F54 /* Frameworks */,
 				D90DE9D32DFF4C93009D3647 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,8 +187,18 @@
 				D90DE9D22DFF4C93009D3647 /* DailyActivities.app */,
 				D90DE9E12DFF4C94009D3647 /* DailyActivitiesTests.xctest */,
 				D90DE9EB2DFF4C94009D3647 /* DailyActivitiesUITests.xctest */,
+				D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D99273C42E0051B700BD0F54 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D99273C52E0051B700BD0F54 /* WidgetKit.framework */,
+				D99273C72E0051B700BD0F54 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,13 +211,16 @@
 				D90DE9CE2DFF4C92009D3647 /* Sources */,
 				D90DE9CF2DFF4C92009D3647 /* Frameworks */,
 				D90DE9D02DFF4C92009D3647 /* Resources */,
+				D99273D82E0051B800BD0F54 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D99273D22E0051B800BD0F54 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				D90DE9D42DFF4C93009D3647 /* DailyActivities */,
+				D99273E52E00566400BD0F54 /* Shared */,
 			);
 			name = DailyActivities;
 			packageProductDependencies = (
@@ -188,6 +278,28 @@
 			productReference = D90DE9EB2DFF4C94009D3647 /* DailyActivitiesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D99273D42E0051B800BD0F54 /* Build configuration list for PBXNativeTarget "DailyActivities-LiveActivitiesExtension" */;
+			buildPhases = (
+				D99273BF2E0051B700BD0F54 /* Sources */,
+				D99273C02E0051B700BD0F54 /* Frameworks */,
+				D99273C12E0051B700BD0F54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D99273C92E0051B700BD0F54 /* DailyActivities-LiveActivities */,
+			);
+			name = "DailyActivities-LiveActivitiesExtension";
+			packageProductDependencies = (
+			);
+			productName = "DailyActivities-LiveActivitiesExtension";
+			productReference = D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -208,6 +320,9 @@
 					D90DE9EA2DFF4C94009D3647 = {
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = D90DE9D12DFF4C92009D3647;
+					};
+					D99273C22E0051B700BD0F54 = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -233,6 +348,7 @@
 				D90DE9D12DFF4C92009D3647 /* DailyActivities */,
 				D90DE9E02DFF4C94009D3647 /* DailyActivitiesTests */,
 				D90DE9EA2DFF4C94009D3647 /* DailyActivitiesUITests */,
+				D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -253,6 +369,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D90DE9E92DFF4C94009D3647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D99273C12E0051B700BD0F54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,6 +406,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D99273BF2E0051B700BD0F54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -295,6 +425,11 @@
 			isa = PBXTargetDependency;
 			target = D90DE9D12DFF4C92009D3647 /* DailyActivities */;
 			targetProxy = D90DE9EC2DFF4C94009D3647 /* PBXContainerItemProxy */;
+		};
+		D99273D22E0051B800BD0F54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */;
+			targetProxy = D99273D12E0051B800BD0F54 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -562,6 +697,62 @@
 			};
 			name = Release;
 		};
+		D99273D52E0051B800BD0F54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8TMMB69WBG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DailyActivities-LiveActivities/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DailyActivities-LiveActivities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sementa.DailyActivities.DailyActivities-LiveActivities";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D99273D62E0051B800BD0F54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8TMMB69WBG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DailyActivities-LiveActivities/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DailyActivities-LiveActivities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sementa.DailyActivities.DailyActivities-LiveActivities";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -597,6 +788,15 @@
 			buildConfigurations = (
 				D90DE9FC2DFF4C94009D3647 /* Debug */,
 				D90DE9FD2DFF4C94009D3647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D99273D42E0051B800BD0F54 /* Build configuration list for PBXNativeTarget "DailyActivities-LiveActivitiesExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D99273D52E0051B800BD0F54 /* Debug */,
+				D99273D62E0051B800BD0F54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

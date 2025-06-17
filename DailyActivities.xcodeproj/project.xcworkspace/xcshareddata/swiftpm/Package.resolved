@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/theosementa/TheoKit",
       "state" : {
-        "revision" : "300370cafd51433bf9d935619ec8f77c39ce75d4",
-        "version" : "1.1.0"
+        "revision" : "ce6e276cc64f5815ef55ccdcfd13011dcee46702",
+        "version" : "1.1.1"
       }
     }
   ],

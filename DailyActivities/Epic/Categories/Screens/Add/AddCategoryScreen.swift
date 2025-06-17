@@ -10,13 +10,20 @@ import TheoKit
 
 struct AddCategoryScreen: View {
     
+    // MARK: Environments
+    @Environment(CategoryStore.self) private var categoryStore
+    @Environment(\.dismiss) private var dismiss
+    
     // MARK: States
     @State private var viewModel: ViewModel = .init()
     
     // MARK: - View
     var body: some View {
         VStack(spacing: 0) {
-            NavigationBarView(title: "word_add_category".localized)
+            NavigationBarView(title: "word_add_category".localized) {
+                await categoryStore.create(viewModel.categoryEntity)
+                dismiss()
+            }
             
             ScrollView {
                 VStack(spacing: TKDesignSystem.Spacing.large) {
@@ -38,6 +45,8 @@ struct AddCategoryScreen: View {
                 .padding(TKDesignSystem.Padding.large)
             }
         }
+        .background(TKDesignSystem.Colors.Background.Theme.bg50)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

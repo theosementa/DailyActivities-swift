@@ -7,17 +7,25 @@
 
 import SwiftUI
 import TheoKit
+import NavigationKit
 
 @main
 struct DailyActivitiesApp: App {
     
-    @State private var categoriesStore: CategoriesStore = .init()
+    @StateObject private var router: Router<AppDestination> = .init()
+    
+    @State private var categoriesStore: CategoryStore = .shared
+    @State private var activityStore: ActivityStore = .shared
     
     // MARK: - View
     var body: some Scene {
         WindowGroup {
-            HomeScreen()
-                .environment(categoriesStore)
+            RoutedNavigationStack(router: router) {
+                HomeScreen()
+            }
+            .environmentObject(router)
+            .environment(categoriesStore)
+            .environment(activityStore)
         }
     }
 }

@@ -1,97 +1,15 @@
-////
-////  DailyActivities_LiveActivities.swift
-////  DailyActivities-LiveActivities
-////
-////  Created by Theo Sementa on 16/06/2025.
-////
 //
-//import WidgetKit
-//import SwiftUI
+//  DailyActivities_LiveActivities.swift
+//  DailyActivities-LiveActivities
 //
-//struct Provider: TimelineProvider {
-//    func placeholder(in context: Context) -> SimpleEntry {
-//        SimpleEntry(date: Date(), emoji: "😀")
-//    }
+//  Created by Theo Sementa on 16/06/2025.
 //
-//    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-//        let entry = SimpleEntry(date: Date(), emoji: "😀")
-//        completion(entry)
-//    }
-//
-//    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-//        var entries: [SimpleEntry] = []
-//
-//        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-//        let currentDate = Date()
-//        for hourOffset in 0 ..< 5 {
-//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-//            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-//            entries.append(entry)
-//        }
-//
-//        let timeline = Timeline(entries: entries, policy: .atEnd)
-//        completion(timeline)
-//    }
-//
-////    func relevances() async -> WidgetRelevances<Void> {
-////        // Generate a list containing the contexts this widget is relevant in.
-////    }
-//}
-//
-//struct SimpleEntry: TimelineEntry {
-//    let date: Date
-//    let emoji: String
-//}
-//
-//struct DailyActivities_LiveActivitiesEntryView : View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        VStack {
-//            Text("Time:")
-//            Text(entry.date, style: .time)
-//
-//            Text("Emoji:")
-//            Text(entry.emoji)
-//        }
-//    }
-//}
-//
-//struct DailyActivities_LiveActivities: Widget {
-//    let kind: String = "DailyActivities_LiveActivities"
-//
-//    var body: some WidgetConfiguration {
-//        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-//            if #available(iOS 17.0, *) {
-//                DailyActivities_LiveActivitiesEntryView(entry: entry)
-//                    .containerBackground(.fill.tertiary, for: .widget)
-//            } else {
-//                DailyActivities_LiveActivitiesEntryView(entry: entry)
-//                    .padding()
-//                    .background()
-//            }
-//        }
-//        .configurationDisplayName("My Widget")
-//        .description("This is an example widget.")
-//    }
-//}
-//
-//#Preview(as: .systemSmall) {
-//    DailyActivities_LiveActivities()
-//} timeline: {
-//    SimpleEntry(date: .now, emoji: "😀")
-//    SimpleEntry(date: .now, emoji: "🤩")
-//}
-
-
-
-
-
-
+// https://developer.apple.com/documentation/widgetkit/displaying-dynamic-dates
 
 import SwiftUI
 import WidgetKit
 import ActivityKit
+import TheoKit
 
 struct PrintingTimeActivity: Widget {
     
@@ -99,48 +17,47 @@ struct PrintingTimeActivity: Widget {
         ActivityConfiguration(for: SessionAttributes.self) { context in
             LiveActivityView(context: context)
         } dynamicIsland: { context in
-            DynamicIsland {
-                DynamicIslandExpandedRegion(.leading) {
-                    Text(context.attributes.sessionEmoji)
-                        .font(.title)
-                        .padding()
-                }
-                
-                DynamicIslandExpandedRegion(.center) {
-                    Text(context.attributes.sessionName)
-                        .font(.title)
-                        .padding()
-                }
-                
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text(context.state.startTime, style: .timer)
-//                    Text(timeString(from: context.state.elapsedTime))
-                        .font(.title)
-//                        .fixedSize(horizontal: true, vertical: true)
-                        .padding()
+            DynamicIsland {                
+                DynamicIslandExpandedRegion(.center, priority: 1) {
+                    HStack(spacing: 12) {
+                        Text(context.attributes.sessionEmoji)
+                            .padding(8)
+                            .background {
+                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                    .fill(Color(hex: context.attributes.sessionColorHex))
+                            }
+                        Text(context.attributes.sessionName)
+                        Text(context.state.startTime, style: .relative)
+                            .monospacedDigit()
+                            .multilineTextAlignment(.trailing)
+                    }
+                    .font(.title2)
+                    .padding()
+                    
                 }
             } compactLeading: {
-                Text(context.attributes.sessionEmoji)
+                HStack(spacing: 4) {
+                    Text(context.attributes.sessionEmoji)
+                    Text(context.attributes.sessionEmoji)
+                }
+                .font(.system(size: 12))
+                .padding(.horizontal, 4)
+                .frame(maxHeight: .infinity)
+                .background(Color(hex: context.attributes.sessionColorHex), in: .capsule)
             } compactTrailing: {
-                Text(context.state.startTime, style: .timer)
-//                Text(timeString(from: context.state.elapsedTime))
-//                    .fixedSize(horizontal: true, vertical: true)
+                Text(context.state.startTime, style: .relative)
+                    .monospacedDigit()
+                    .multilineTextAlignment(.trailing)
             } minimal: {
-                Text(context.state.startTime, style: .timer)
-//                Text(timeString(from: context.state.elapsedTime))
-//                    .fixedSize(horizontal: true, vertical: true)
+                Text(context.attributes.sessionEmoji)
             }
         }
     }
     
-    private func timeString(from seconds: TimeInterval) -> String {
-        let minutes = Int(seconds) / 60
-        let seconds = Int(seconds) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
 }
 
 struct LiveActivityView: View {
+    
     let context: ActivityViewContext<SessionAttributes>
     
     var body: some View {
@@ -152,27 +69,27 @@ struct LiveActivityView: View {
                 Text(context.attributes.sessionName)
                     .font(.headline)
                 
-//                Text(timeString(from: context.state.elapsedTime))
-                Text(context.state.startTime, style: .timer)
+                Text(context.state.startTime, style: .relative)
                     .font(.subheadline)
             }
-            
-            Spacer()
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding()
-    }
-    
-    private func timeString(from seconds: TimeInterval) -> String {
-        let minutes = Int(seconds) / 60
-        let seconds = Int(seconds) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+        .activityBackgroundTint(Color(hex: context.attributes.sessionColorHex))
     }
 }
 
 // MARK: - Preview
-#Preview(as: .content, using: SessionAttributes.init(sessionName: "Preview Session", sessionEmoji: "🎮")) {
+#Preview(
+    as: .content,
+    using: SessionAttributes
+        .init(
+            sessionName: "Preview Session",
+            sessionEmoji: "🎮",
+            sessionColorHex: "#FF5733"
+        )
+) {
     PrintingTimeActivity()
 } contentStates: {
-//    SessionAttributes.ContentState(elapsedTime: 10)
     SessionAttributes.ContentState(startTime: .now)
 }

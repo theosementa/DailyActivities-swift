@@ -13,6 +13,7 @@
 		D99273C62E0051B700BD0F54 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99273C52E0051B700BD0F54 /* WidgetKit.framework */; };
 		D99273C82E0051B700BD0F54 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99273C72E0051B700BD0F54 /* SwiftUI.framework */; };
 		D99273D32E0051B800BD0F54 /* DailyActivities-LiveActivitiesExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D99273FD2E016F9700BD0F54 /* TheoKit in Frameworks */ = {isa = PBXBuildFile; productRef = D99273FC2E016F9700BD0F54 /* TheoKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +81,7 @@
 		D99273DC2E0052AF00BD0F54 /* Exceptions for "DailyActivities" folder in "DailyActivities-LiveActivitiesExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Core/SessionActivityViewModel.swift,
+				Core/SessionActivityManager.swift,
 			);
 			target = D99273C22E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension */;
 		};
@@ -160,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D99273FD2E016F9700BD0F54 /* TheoKit in Frameworks */,
 				D99273C82E0051B700BD0F54 /* SwiftUI.framework in Frameworks */,
 				D99273C62E0051B700BD0F54 /* WidgetKit.framework in Frameworks */,
 			);
@@ -295,6 +297,7 @@
 			);
 			name = "DailyActivities-LiveActivitiesExtension";
 			packageProductDependencies = (
+				D99273FC2E016F9700BD0F54 /* TheoKit */,
 			);
 			productName = "DailyActivities-LiveActivitiesExtension";
 			productReference = D99273C32E0051B700BD0F54 /* DailyActivities-LiveActivitiesExtension.appex */;
@@ -845,6 +848,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D99270742E0012A000BD0F54 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
 			productName = MCEmojiPicker;
+		};
+		D99273FC2E016F9700BD0F54 /* TheoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9926C0F2E0009AA00BD0F54 /* XCRemoteSwiftPackageReference "TheoKit" */;
+			productName = TheoKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

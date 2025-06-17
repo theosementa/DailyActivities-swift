@@ -14,6 +14,7 @@ struct DailyActivitiesApp: App {
     
     @StateObject private var router: Router<AppDestination> = .init()
     
+    @State private var sessionManager: SessionActivityManager = .shared
     @State private var categoriesStore: CategoryStore = .shared
     @State private var activityStore: ActivityStore = .shared
     
@@ -24,6 +25,7 @@ struct DailyActivitiesApp: App {
                 HomeScreen()
             }
             .environmentObject(router)
+            .environment(sessionManager)
             .environment(categoriesStore)
             .environment(activityStore)
         }

@@ -64,6 +64,7 @@ struct LiveActivityView: View {
         HStack(spacing: 12) {
             Text(context.attributes.sessionEmoji)
                 .font(.system(size: 32))
+                .shadow(radius: 4, y: 4)
             
             VStack(alignment: .leading) {
                 Text(context.attributes.sessionName)

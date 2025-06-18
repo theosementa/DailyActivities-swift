@@ -16,7 +16,7 @@ struct CategoryDetailsScreen: View {
     // MARK: Environments
     @Environment(SessionActivityManager.self) private var sessionManager
     @Environment(ActivityStore.self) private var activityStore
-        
+    
     // MARK: Computed
     var category: CategoryEntity? {
         return CategoryStore.shared.findOneById(categoryId)
@@ -25,8 +25,10 @@ struct CategoryDetailsScreen: View {
     // MARK: - View
     var body: some View {
         if let category {
-            ScrollView {
-                VStack {
+            VStack(spacing: 0) {
+                NavigationBarView()
+                
+                ScrollView {
                     HStack {
                         Button {
                             Task {
@@ -73,16 +75,22 @@ struct CategoryDetailsScreen: View {
                         Text("No active session")
                     }
                     
-                    ForEach(activityStore.activities.filter { $0.endDate != nil }) { activity in
-                        ActivityRowView(activity: activity)
+                    let filteredActivities = activityStore.activities
+                        .filter { $0.endDate != nil }
+                        .sorted { $0.endDate! > $1.endDate! }
+                    VStack(spacing: TKDesignSystem.Spacing.medium) {
+                        ForEach(filteredActivities) { activity in
+                            ActivityRowView(activity: activity)
+                        }
                     }
                 }
-                .padding(24)
+                .contentMargins(TKDesignSystem.Padding.large)
+                .background(TKDesignSystem.Colors.Background.Theme.bg50)
+                .onViewDidLoad {
+                    await activityStore.fetchAll(for: categoryId)
+                }
             }
-            .background(TKDesignSystem.Colors.Background.Theme.bg50)
-            .onViewDidLoad {
-                await activityStore.fetchAll(for: categoryId)
-            }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

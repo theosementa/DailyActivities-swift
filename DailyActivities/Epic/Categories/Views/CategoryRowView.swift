@@ -18,6 +18,7 @@ struct CategoryRowView: View {
         HStack(spacing: TKDesignSystem.Spacing.medium) {
             Text(category.emoji)
                 .font(.system(size: 24))
+                .shadow(radius: 4, y: 4)
                 .padding(12)
                 .roundedRectangleBorder(
                     category.color,
@@ -37,7 +38,7 @@ struct CategoryRowView: View {
                         
             IconSVGView(icon: .iconChevronRight, value: .large)
                 .foregroundStyle(Color.label)
-                .padding(.trailing, 16)
+                .padding(.trailing, TKDesignSystem.Padding.medium)
         }
         .padding(TKDesignSystem.Padding.extraSmall)
         .roundedRectangleBorder(

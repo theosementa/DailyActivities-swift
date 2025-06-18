@@ -17,18 +17,31 @@ struct HomeScreen: View {
 
     // MARK: - View
     var body: some View {
-        ScrollView {
-            VStack(spacing: TKDesignSystem.Spacing.medium) {
-                ForEach(categoryStore.categories) { category in
-                    NavigationButton(
-                        route: .push,
-                        destination: AppDestination.category(.details(categoryId: category.id))
-                    ) {
-                        CategoryRowView(category: category)
+        VStack(spacing: 0) {
+            NavigationBarView(
+                title: "Hello, Théo !".localized,
+                withDismissButton: false,
+                actionButton: .init(
+                    icon: .iconGear,
+                    color: Color.label,
+                    action: { }
+                )
+            )
+            
+            ScrollView {
+                VStack(spacing: TKDesignSystem.Spacing.medium) {
+                    ForEach(categoryStore.categories) { category in
+                        NavigationButton(
+                            route: .push,
+                            destination: AppDestination.category(.details(categoryId: category.id))
+                        ) {
+                            CategoryRowView(category: category)
+                        }
                     }
                 }
+                .padding(TKDesignSystem.Padding.large)
             }
-            .padding(TKDesignSystem.Padding.large)
+            .scrollIndicators(.hidden)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(TKDesignSystem.Colors.Background.Theme.bg50)

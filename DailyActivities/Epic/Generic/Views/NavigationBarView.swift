@@ -14,7 +14,7 @@ struct NavigationBarView: View {
     // MARK: Dependencies
     var title: String? = nil
     var withDismissButton: Bool = true
-    var action: (() async -> Void)? = nil
+    var actionButton: ActionButton? = nil
     
     // MARK: - View
     var body: some View {
@@ -33,16 +33,21 @@ struct NavigationBarView: View {
                     .fullWidth(.leading)
                 }
                 
-                Button {
-                    if let action {
-                        Task { await action() }
+                if let actionButton {
+                    Button {
+                        Task { await actionButton.action() }
+                    } label: {
+                        if let title = actionButton.title {
+                            Text(title)
+                        } else if let icon = actionButton.icon {
+                            Image(icon)
+                                .renderingMode(.template)
+                        }
                     }
-                } label: {
-                    Text("word_create".localized)
-                        .fontWithLineHeight(Fonts.Body.large)
-                        .foregroundStyle(TKDesignSystem.Colors.Info.c500)
+                    .fontWithLineHeight(Fonts.Body.large)
+                    .foregroundStyle(actionButton.color)
+                    .fullWidth(.trailing)
                 }
-                .fullWidth(.trailing)
             }
             
             if let title {
@@ -51,7 +56,20 @@ struct NavigationBarView: View {
             }
         }
         .padding(.horizontal, TKDesignSystem.Padding.large)
+        .padding(.vertical, TKDesignSystem.Padding.small)
+        .background(TKDesignSystem.Colors.Background.Theme.bg50)
     }
+}
+
+extension NavigationBarView {
+    
+    struct ActionButton {
+        var icon: ImageResource? = nil
+        var title: String? = nil
+        var color: Color = TKDesignSystem.Colors.Info.c500
+        var action: () async -> Void
+    }
+    
 }
 
 // MARK: - Preview

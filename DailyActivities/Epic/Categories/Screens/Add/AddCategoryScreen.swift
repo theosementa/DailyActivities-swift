@@ -20,10 +20,16 @@ struct AddCategoryScreen: View {
     // MARK: - View
     var body: some View {
         VStack(spacing: 0) {
-            NavigationBarView(title: "word_add_category".localized) {
-                await categoryStore.create(viewModel.categoryEntity)
-                dismiss()
-            }
+            NavigationBarView(
+                title: "word_add_category".localized,
+                actionButton: .init(
+                    title: "word_create".localized,
+                    action: {
+                        await categoryStore.create(viewModel.categoryEntity)
+                        dismiss()
+                    }
+                )
+            )
             
             ScrollView {
                 VStack(spacing: TKDesignSystem.Spacing.large) {

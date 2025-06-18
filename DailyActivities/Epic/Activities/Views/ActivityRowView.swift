@@ -22,6 +22,7 @@ struct ActivityRowView: View {
             HStack(spacing: TKDesignSystem.Spacing.medium) {
                 Text(category.emoji)
                     .font(.system(size: 24))
+                    .shadow(radius: 4, y: 4)
                     .padding(12)
                     .roundedRectangleBorder(
                         category.color,
@@ -50,6 +51,7 @@ struct ActivityRowView: View {
                     Image(systemName: "trash")
                         .foregroundStyle(Color.red)
                 }
+                .padding(.trailing, TKDesignSystem.Padding.medium)
             }
             .padding(TKDesignSystem.Padding.extraSmall)
             .roundedRectangleBorder(

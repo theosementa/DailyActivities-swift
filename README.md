@@ -1,5 +1,6 @@
 ## Overview
 Daily Activities is a proof-of-concept iOS application that demonstrates the integration of Live Activities and Dynamic Island. Built with SwiftUI, leveraging the @Observable macro and SwiftData for persistence.
+You can find the design on figma [here](https://www.figma.com/design/lMO30lAnmbGcKj30kpPEVw/Daily-Activities?node-id=1-7&t=huqfmdj8Hp59P91b-1)
 
 ## Purpose
 The app helps you track time spent on various daily activities such as:

@@ -29,52 +29,22 @@ struct CategoryDetailsScreen: View {
                 NavigationBarView()
                 
                 ScrollView {
-                    HStack {
-                        Button {
-                            Task {
-                                let newActivity: ActivityEntity = .init(categoryId: category.id)
-                                await activityStore.create(newActivity)
-                                sessionManager.startLiveActivity(
-                                    sessionName: category.name,
-                                    sessionEmoji: category.emoji,
-                                    sessionColorHex: category.colorHex
-                                )
-                            }
-                        } label: {
-                            Text("Start a session")
-                                .foregroundStyle(Color.white)
-                                .padding()
-                                .fullWidth()
-                                .background(Color.blue, in: .rect(cornerRadius: 12))
-                        }
-                        
-                        Button {
-                            if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
-                                currentSession.endDate = Date()
-                                activityStore.currentSession = nil
-                                sessionManager.endLiveActivity()
-                                do {
-                                    try activityStore.repository.context.save()
-                                } catch {
-                                    print("⚠️ \(error.localizedDescription)")
-                                }
-                            }
-                        } label: {
-                            Text("End session")
-                                .foregroundStyle(Color.white)
-                                .padding()
-                                .fullWidth()
-                                .background(Color.red, in: .rect(cornerRadius: 12))
-                        }
-                    }
-                    
                     if let currentSession = activityStore.currentSession {
-                        ActivityRowView(activity: currentSession)
+                        RunningSessionView(activity: currentSession)
                             .padding(.bottom, 32)
                     } else {
-                        Text("No active session")
+                        ActionButtonView(title: "start_session".localized, backgroundColor: .blue) {
+                            let newActivity: ActivityEntity = .init(categoryId: category.id)
+                            await activityStore.create(newActivity)
+                            sessionManager.startLiveActivity(
+                                sessionName: category.name,
+                                sessionEmoji: category.emoji,
+                                sessionColorHex: category.colorHex
+                            )
+                        }
+                        .padding(.bottom, 32)
                     }
-                    
+                                        
                     let filteredActivities = activityStore.activities
                         .filter { $0.endDate != nil }
                         .sorted { $0.endDate! > $1.endDate! }
@@ -84,6 +54,7 @@ struct CategoryDetailsScreen: View {
                         }
                     }
                 }
+                .animation(.smooth, value: sessionManager.isSessionRunning)
                 .contentMargins(TKDesignSystem.Padding.large)
                 .background(TKDesignSystem.Colors.Background.Theme.bg50)
                 .onViewDidLoad {

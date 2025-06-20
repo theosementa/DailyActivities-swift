@@ -32,16 +32,10 @@ struct ActivityRowView: View {
                 VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.extraSmall) {
                     Text("word_session_of".localized + " \(category.name)")
                         .fontWithLineHeight(Fonts.Body.medium)
-                    
-                    Group {
-                        if activity.endDate == nil {
-                            Text(activity.startDate, style: .relative)
-                        } else {
-                            Text(activity.duration.asHoursMinutes)
-                        }
-                    }
-                    .fontWithLineHeight(Fonts.Body.small)
-                    .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
+                   
+                    Text(activity.duration.asHoursMinutes)
+                        .fontWithLineHeight(Fonts.Body.small)
+                        .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
                 }
                 .fullWidth(.leading)
                 

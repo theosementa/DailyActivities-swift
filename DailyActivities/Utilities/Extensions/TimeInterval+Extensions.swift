@@ -18,7 +18,7 @@ extension TimeInterval {
         if hours > 0 {
             return String(format: "%dh%02d", hours, minutes)
         } else if minutes > 0 {
-            return String(format: "%dmin", minutes)
+            return String(format: "%dmin%ds", minutes, seconds)
         } else {
             return "\(seconds)s"
         }

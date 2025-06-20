@@ -13,23 +13,31 @@ struct ActionButtonView: View {
     // MARK: Dependencies
     let title: String
     let backgroundColor: Color
+    var action: () async -> Void
     
     // MARK: - View
     var body: some View {
-        Text(title)
-            .fontWithLineHeight(Fonts.Body.large)
-            .foregroundStyle(.white)
-            .fullWidth()
-            .padding(TKDesignSystem.Padding.medium)
-            .background {
-                RoundedRectangle(cornerRadius: TKDesignSystem.Radius.medium, style: .continuous)
-                    .fill(LinearGradient(autoGradientForColor: backgroundColor.toHex()))
+        Button {
+            Task {
+                await action()
             }
+        } label: {
+            Text(title)
+                .fontWithLineHeight(Fonts.Body.large)
+                .foregroundStyle(.white)
+                .fullWidth()
+                .padding(TKDesignSystem.Padding.medium)
+                .background {
+                    RoundedRectangle(cornerRadius: TKDesignSystem.Radius.medium, style: .continuous)
+                        .fill(LinearGradient(autoGradientForColor: backgroundColor.toHex()))
+                }
+        }
+
     }
 }
 
 // MARK: - Preview
 #Preview {
-    ActionButtonView(title: "Preview", backgroundColor: .blue)
+    ActionButtonView(title: "Preview", backgroundColor: .blue) { }
         .padding()
 }

@@ -39,6 +39,7 @@ struct PrintingTimeActivity: Widget {
                 HStack(spacing: 4) {
                     Text(context.attributes.sessionEmoji)
                     Text(context.attributes.sessionEmoji)
+                    Text(context.attributes.sessionEmoji)
                 }
                 .font(.system(size: 12))
                 .padding(.horizontal, 4)

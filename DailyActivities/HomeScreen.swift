@@ -30,7 +30,7 @@ struct HomeScreen: View {
             
             ScrollView {
                 VStack(spacing: TKDesignSystem.Spacing.medium) {
-                    ForEach(categoryStore.categories) { category in
+                    ForEach(categoryStore.categories.sorted { $0.elapsedTimeThisWeek > $1.elapsedTimeThisWeek }) { category in
                         NavigationButton(
                             route: .push,
                             destination: AppDestination.category(.details(categoryId: category.id))

@@ -21,7 +21,7 @@ struct AddCategoryScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             NavigationBarView(
-                title: "word_add_category".localized,
+                title: "add_category_title".localized,
                 actionButton: .init(
                     title: "word_create".localized,
                     action: {

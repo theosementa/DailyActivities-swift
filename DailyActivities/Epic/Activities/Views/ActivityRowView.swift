@@ -30,7 +30,7 @@ struct ActivityRowView: View {
                     )
                 
                 VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.extraSmall) {
-                    Text("word_session_of".localized + " \(category.name)")
+                    Text("session_of".localized + " \(category.name)")
                         .fontWithLineHeight(Fonts.Body.medium)
                    
                     Text(activity.duration.asHoursMinutes)
@@ -38,20 +38,29 @@ struct ActivityRowView: View {
                         .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
                 }
                 .fullWidth(.leading)
-                
-                Button {
-                    Task { await activityStore.delete(activity) }
-                } label: {
-                    Image(systemName: "trash")
-                        .foregroundStyle(Color.red)
-                }
-                .padding(.trailing, TKDesignSystem.Padding.medium)
             }
             .padding(TKDesignSystem.Padding.extraSmall)
             .roundedRectangleBorder(
                 TKDesignSystem.Colors.Background.Theme.bg100,
                 radius: TKDesignSystem.Radius.medium
             )
+            .contentShape(
+                .contextMenuPreview,
+                RoundedRectangle(cornerRadius: TKDesignSystem.Radius.medium, style: .continuous)
+            )
+            .contextMenu {
+                AsyncButtonView(role: .destructive) {
+                    await activityStore.delete(activity)
+                } label: {
+                    Label(
+                        title: { Text("word_delete") },
+                        icon: { IconSVGView(icon: .iconTrash, value: .medium) }
+                    )
+                }
+            } preview: {
+                self
+                    .frame(width: UIScreen.main.bounds.width - TKDesignSystem.Padding.large * 2)
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ struct CategoryDetailsScreen: View {
                 NavigationBarView()
                 
                 ScrollView {
-                    if let currentSession = activityStore.currentSession {
+                    if let currentSession = activityStore.currentActivity {
                         RunningSessionView(activity: currentSession)
                             .padding(.bottom, 32)
                     } else {

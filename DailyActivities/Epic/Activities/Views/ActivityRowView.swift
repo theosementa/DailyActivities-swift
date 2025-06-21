@@ -15,6 +15,7 @@ struct ActivityRowView: View {
     
     // MARK: Environment
     @Environment(ActivityStore.self) private var activityStore
+    @Environment(SessionActivityManager.self) private var sessionManager
     
     // MARK: - View
     var body: some View {

@@ -45,7 +45,7 @@ struct RunningSessionView: View {
                 ActionButtonView(title: "end_session", backgroundColor: .red) {
                     if let currentSession = activityStore.activities.first(where: { $0.endDate == nil }) {
                         currentSession.endDate = Date()
-                        activityStore.currentSession = nil
+                        activityStore.currentActivity = nil
                         sessionManager.endLiveActivity()
                         do {
                             try activityStore.repository.context.save()
@@ -58,8 +58,8 @@ struct RunningSessionView: View {
                     self.actionButtonHeight = size.height
                 }
                 
-                Image(.iconXmark)
-                    .frame(width: actionButtonHeight, height: actionButtonHeight)
+                IconSVGView(icon: .iconXmark, value: .large)
+                    .foregroundStyle(Color.label)
                     .roundedRectangleBorder(
                         TKDesignSystem.Colors.Background.Theme.bg200,
                         radius: TKDesignSystem.Radius.medium

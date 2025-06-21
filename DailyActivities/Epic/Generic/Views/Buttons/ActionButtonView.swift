@@ -26,7 +26,7 @@ struct ActionButtonView: View {
                 .fontWithLineHeight(Fonts.Body.large)
                 .foregroundStyle(.white)
                 .fullWidth()
-                .padding(TKDesignSystem.Padding.medium)
+                .padding(TKDesignSystem.Padding.standard)
                 .background {
                     RoundedRectangle(cornerRadius: TKDesignSystem.Radius.medium, style: .continuous)
                         .fill(LinearGradient(autoGradientForColor: backgroundColor.toHex()))

@@ -39,7 +39,7 @@ final class ActivityEntity: Identifiable {
 @MainActor
 extension ActivityEntity {
     
-    var category: CategoryEntity? {
+    var category: CategoryModel? {
         return CategoryStore.shared.findOneById(self.categoryId)
     }
     
@@ -57,7 +57,7 @@ extension ActivityEntity {
         startDate: Date(timeIntervalSinceNow: -3600),
         endDate: Date(),
         notes: "Test activity",
-        categoryId: CategoryEntity.preview.id
+        categoryId: CategoryModel.preview.id
     )
     
 }

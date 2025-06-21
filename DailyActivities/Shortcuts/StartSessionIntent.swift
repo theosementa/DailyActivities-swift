@@ -17,7 +17,7 @@ struct StartSessionIntent: AppIntent {
         description: "Ce champs correspond à la catégorie de la session",
         requestValueDialog: "Choisissez une catégorie"
     )
-    var category: CategoryEntity?
+    var category: CategoryModel?
     
     func perform() async throws -> some IntentResult {
         

@@ -11,48 +11,61 @@ import TheoKit
 struct CategoryRowView: View {
     
     // MARK: Dependencies
-    var category: CategoryEntity
+    var categoryId: UUID
+    
+    // MARK: Environment
+    @Environment(CategoryStore.self) private var categoriesStore
+    
+    var category: CategoryModel? {
+        return categoriesStore.findOneById(categoryId)
+    }
         
     // MARK: - View
     var body: some View {
-        HStack(spacing: TKDesignSystem.Spacing.medium) {
-            Text(category.emoji)
-                .font(.system(size: 24))
-                .shadow(radius: 4, y: 4)
-                .padding(12)
-                .roundedRectangleBorder(
-                    category.color,
-                    radius: TKDesignSystem.Radius.small
-                )
-            
-            VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.extraSmall) {
-                Text(category.name)
-                    .fontWithLineHeight(Fonts.Body.medium)
-                    .foregroundStyle(Color.label)
+        if let category {
+            HStack(spacing: TKDesignSystem.Spacing.medium) {
+                Text(category.emoji)
+                    .font(.system(size: 24))
+                    .shadow(radius: 4, y: 4)
+                    .padding(12)
+                    .roundedRectangleBorder(
+                        category.color,
+                        radius: TKDesignSystem.Radius.small
+                    )
                 
-                Text(category.elapsedTimeThisWeek.asHoursMinutes)
-                    .fontWithLineHeight(Fonts.Body.small)
-                    .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
+                VStack(alignment: .leading, spacing: TKDesignSystem.Spacing.extraSmall) {
+                    Text(category.name)
+                        .fontWithLineHeight(Fonts.Body.medium)
+                        .foregroundStyle(Color.label)
+                    
+                    Text(category.elapsedTimeThisWeek.asHoursMinutes)
+                        .fontWithLineHeight(Fonts.Body.small)
+                        .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
+                }
+                .fullWidth(.leading)
+                
+                IconSVGView(icon: .iconChevronRight, value: .large)
+                    .foregroundStyle(Color.label)
+                    .padding(.trailing, TKDesignSystem.Padding.medium)
             }
-            .fullWidth(.leading)
-                        
-            IconSVGView(icon: .iconChevronRight, value: .large)
-                .foregroundStyle(Color.label)
-                .padding(.trailing, TKDesignSystem.Padding.medium)
-        }
-        .padding(TKDesignSystem.Padding.extraSmall)
-        .roundedRectangleBorder(
-            TKDesignSystem.Colors.Background.Theme.bg100,
-            radius: TKDesignSystem.Radius.medium
-        )
-        .task {
-            await elapsedThisWeek()
+            .padding(TKDesignSystem.Padding.extraSmall)
+            .roundedRectangleBorder(
+                TKDesignSystem.Colors.Background.Theme.bg100,
+                radius: TKDesignSystem.Radius.medium
+            )
+            .task {
+                await elapsedThisWeek()
+            }
         }
     }
     
     func elapsedThisWeek() async {
+        guard var category else { return }
+        
         do {
-            self.category.elapsedTimeThisWeek = try await ActivityRepository.fetchTimeThisWeek(for: category.id)
+            let elapsedTime = try await ActivityRepository.fetchTimeThisWeek(for: category.id)
+            category.elapsedTimeThisWeek = elapsedTime
+            categoriesStore.updateLocaly(category)
         } catch {
             print("⚠️ \(error.localizedDescription)")
         }
@@ -61,7 +74,7 @@ struct CategoryRowView: View {
 
 // MARK: - Preview
 #Preview {
-    CategoryRowView(category: .preview)
+    CategoryRowView(categoryId: CategoryModel.preview.id)
         .padding()
         .preferredColorScheme(.dark)
 }

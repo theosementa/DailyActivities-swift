@@ -35,8 +35,8 @@ extension GenericRepository {
     
     func fetchAll() throws -> [T] {        
         let fetchDescriptor = FetchDescriptor<T>(sortBy: [])
-        let tags = try container.mainContext.fetch(fetchDescriptor)
-        return tags
+        let items = try container.mainContext.fetch(fetchDescriptor)
+        return items
     }
     
     func fetchOneById(_ id: PersistentIdentifier) throws -> T {

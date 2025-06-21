@@ -1,5 +1,5 @@
 //
-//  CategoryEntity+Extensions.swift
+//  CategoryModel+Extensions.swift
 //  DailyActivities
 //
 //  Created by Theo Sementa on 21/06/2025.
@@ -8,7 +8,7 @@
 import Foundation
 import AppIntents
 
-extension CategoryEntity: AppEntity {
+extension CategoryModel: AppEntity, @unchecked Sendable {
     
     public static var typeDisplayRepresentation: TypeDisplayRepresentation {
         return TypeDisplayRepresentation(name: "Categorie")

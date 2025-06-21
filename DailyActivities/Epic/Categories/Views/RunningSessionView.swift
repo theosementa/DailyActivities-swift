@@ -60,6 +60,7 @@ struct RunningSessionView: View {
                 
                 IconSVGView(icon: .iconXmark, value: .large)
                     .foregroundStyle(Color.label)
+                    .frame(width: actionButtonHeight, height: actionButtonHeight)
                     .roundedRectangleBorder(
                         TKDesignSystem.Colors.Background.Theme.bg200,
                         radius: TKDesignSystem.Radius.medium

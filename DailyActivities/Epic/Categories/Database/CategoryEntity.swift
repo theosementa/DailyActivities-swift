@@ -37,16 +37,14 @@ extension CategoryEntity {
     var color: Color {
         return Color(hex: self.colorHex)
     }
+    
+    func toModel() -> CategoryModel {
+        return .init(
+            localId: self.id,
+            name: self.name,
+            emoji: self.emoji,
+            color: Color(hex: self.colorHex)
+        )
+    }
         
-}
-
-// MARK: - Mocks
-extension CategoryEntity {
-    
-    static let preview = CategoryEntity(
-        name: "Gaming",
-        emoji: "🎮",
-        colorHex: "#FF5733"
-    )
-    
 }

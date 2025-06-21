@@ -35,7 +35,7 @@ struct HomeScreen: View {
                             route: .push,
                             destination: AppDestination.category(.details(categoryId: category.id))
                         ) {
-                            CategoryRowView(category: category)
+                            CategoryRowView(categoryId: category.id)
                         }
                     }
                 }

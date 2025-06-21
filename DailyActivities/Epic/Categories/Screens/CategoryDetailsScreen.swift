@@ -18,7 +18,7 @@ struct CategoryDetailsScreen: View {
     @Environment(ActivityStore.self) private var activityStore
     
     // MARK: Computed
-    var category: CategoryEntity? {
+    var category: CategoryModel? {
         return CategoryStore.shared.findOneById(categoryId)
     }
     
@@ -39,7 +39,7 @@ struct CategoryDetailsScreen: View {
                             sessionManager.startLiveActivity(
                                 sessionName: category.name,
                                 sessionEmoji: category.emoji,
-                                sessionColorHex: category.colorHex
+                                sessionColorHex: category.color.toHex()
                             )
                         }
                         .padding(.bottom, 32)
@@ -68,5 +68,5 @@ struct CategoryDetailsScreen: View {
 
 // MARK: - Preview
 #Preview {
-    CategoryDetailsScreen(categoryId: CategoryEntity.preview.id)
+    CategoryDetailsScreen(categoryId: CategoryModel.preview.id)
 }

@@ -14,7 +14,7 @@ final class CategoryStore {
     
     private init() { }
     
-    private(set) var categories: [CategoryEntity] = []
+    private(set) var categories: [CategoryModel] = []
 }
 
 @MainActor
@@ -22,7 +22,7 @@ extension CategoryStore {
  
     func fetchAll(fromNetwork: Bool = false) async {
         do {
-            self.categories = try repository.fetchAll()
+            self.categories = try repository.fetchAll().map { $0.toModel() }
             if fromNetwork {
                 
             }
@@ -34,9 +34,15 @@ extension CategoryStore {
     func create(_ category: CategoryEntity) async {
         do {
             try repository.insert(category)
-            self.categories.append(category)
+            self.categories.append(category.toModel())
         } catch {
             print("⚠️ \(error.localizedDescription)")
+        }
+    }
+    
+    func updateLocaly(_ category: CategoryModel) {
+        if let index = self.categories.firstIndex(where: { $0.id == category.id }) {
+            self.categories[index] = category
         }
     }
     
@@ -53,8 +59,10 @@ extension CategoryStore {
 
 extension CategoryStore {
     
-    func findOneById(_ id: UUID) -> CategoryEntity? {
+    func findOneById(_ id: UUID) -> CategoryModel? {
         return self.categories.first { $0.id == id }
     }
+    
+    
 }
 

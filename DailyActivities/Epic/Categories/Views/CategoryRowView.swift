@@ -30,7 +30,7 @@ struct CategoryRowView: View {
                     .fontWithLineHeight(Fonts.Body.medium)
                     .foregroundStyle(Color.label)
                 
-                Text(self.category.elapsedTimeThisWeek.asHoursMinutes)
+                Text(category.elapsedTimeThisWeek.asHoursMinutes)
                     .fontWithLineHeight(Fonts.Body.small)
                     .foregroundStyle(TKDesignSystem.Colors.Background.Theme.bg600)
             }
